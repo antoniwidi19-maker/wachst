@@ -1,0 +1,710 @@
+/* =========================================================
+   Strata Ridge X — style.css
+   ========================================================= */
+
+/* ---------- 0. Variabel & dasar ---------- */
+:root {
+  --bg: #07080b;
+  --fg: #f4f4f6;
+  --muted: #9a9ca6;
+  --accent: #ff6a2b;
+  --band: #ff6a2b;                       /* warna tali, diubah lewat JS */
+  --ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; background: var(--bg); }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: inherit; }
+
+.muted { color: var(--muted); }
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+.label {
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+/* ---------- 1. Progress bar & navigasi ---------- */
+.progress {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 3px;
+  background: linear-gradient(90deg, var(--accent), #ffb58a);
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  z-index: 60;
+}
+
+.nav {
+  position: fixed;
+  inset: 0 0 auto 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 7vw;
+  border-bottom: 1px solid transparent;
+  transition: background 0.4s, border-color 0.4s;
+}
+.nav.scrolled {
+  background: rgba(7, 8, 11, 0.7);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+.logo {
+  font-weight: 900;
+  letter-spacing: 0.3em;
+  text-decoration: none;
+  color: #fff;
+}
+.nav-links { display: flex; gap: 28px; }
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: #fff; }
+
+/* ---------- 2. Tombol & link ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 14px 26px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 10px 30px rgba(255, 106, 43, 0.35);
+  transition: transform 0.3s var(--ease), box-shadow 0.3s;
+}
+.btn:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 16px 40px rgba(255, 106, 43, 0.5);
+}
+.btn-sm { padding: 9px 16px; font-size: 14px; box-shadow: none; }
+.btn-lg { padding: 18px 36px; font-size: 17px; }
+
+.link {
+  color: var(--fg);
+  font-weight: 600;
+  text-decoration: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  padding-bottom: 3px;
+}
+
+/* ---------- 3. Hero ---------- */
+.hero {
+  position: relative;
+  isolation: isolate;
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  align-items: center;
+  gap: 4vw;
+  padding: 120px 7vw 90px;
+  overflow: hidden;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: radial-gradient(55% 50% at 72% 50%, rgba(255, 106, 43, 0.22), transparent 70%);
+  pointer-events: none;
+}
+.hero-word {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: -1;
+  transform: translate(-50%, -50%);
+  font-size: clamp(120px, 26vw, 420px);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.14);
+  background: linear-gradient(180deg, rgba(255, 106, 43, 0.35), transparent 75%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  pointer-events: none;
+  user-select: none;
+  animation: wordIn 1.6s var(--ease) both;
+}
+.headline {
+  font-size: clamp(44px, 7vw, 104px);
+  font-weight: 900;
+  line-height: 0.95;
+  letter-spacing: -0.04em;
+  margin-bottom: 24px;
+}
+.sub {
+  color: var(--muted);
+  font-size: clamp(16px, 1.5vw, 20px);
+  line-height: 1.55;
+  max-width: 44ch;
+  margin-bottom: 36px;
+}
+.cta-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 28px;
+}
+.hero-copy > :nth-child(2) { transition-delay: 0.1s; }
+.hero-copy > :nth-child(3) { transition-delay: 0.2s; }
+.hero-copy > :nth-child(4) { transition-delay: 0.3s; }
+
+.hero-product {
+  position: relative;
+  width: min(100%, 420px);
+  justify-self: center;
+  perspective: 1200px;
+  animation: float 7s ease-in-out infinite;
+}
+.hero-product .watch {
+  transform: rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform 0.5s var(--ease);
+}
+
+.scroll-hint {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--muted);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+/* ---------- 4. Animasi muncul saat di-scroll ---------- */
+.reveal-up {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+}
+.reveal-up.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ---------- 5. Story (sticky, scroll-driven) ---------- */
+.story {
+  position: relative;
+  height: 380vh;
+}
+.story-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 4vw;
+  padding: 0 7vw;
+  perspective: 1400px;
+  overflow: hidden;
+}
+.story-copy {
+  position: relative;
+  min-height: 340px;
+}
+.scene {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: opacity 0.6s var(--ease), transform 0.8s var(--ease);
+}
+.scene.active {
+  opacity: 1;
+  transform: none;
+}
+.big {
+  display: inline-block;
+  font-size: clamp(96px, 14vw, 200px);
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+  font-variant-numeric: tabular-nums;
+}
+.unit {
+  margin-left: 0.5rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--muted);
+}
+.scene h2 {
+  font-size: clamp(28px, 3.4vw, 50px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  margin: 18px 0 14px;
+}
+.scene p {
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 40ch;
+}
+.story-product {
+  width: min(92%, 400px);
+  justify-self: center;
+  transform: rotateY(calc(var(--p, 0) * 360deg));
+  will-change: transform;
+}
+.story-dots {
+  position: absolute;
+  left: 7vw;
+  bottom: 7vh;
+  display: flex;
+  gap: 8px;
+}
+.story-dots span {
+  width: 28px;
+  height: 3px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.2);
+  transition: width 0.4s var(--ease), background 0.4s;
+}
+.story-dots span.active {
+  width: 56px;
+  background: var(--accent);
+}
+
+/* ---------- 6. Komponen jam tangan (CSS murni) ---------- */
+.watch {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 0.9;
+  isolation: isolate;
+}
+.band {
+  position: absolute;
+  left: 50%;
+  top: -28%;
+  width: 72%;
+  height: 156%;
+  transform: translateX(-50%);
+  z-index: -1;
+  border-radius: 40px;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0%, #000 16%, #000 84%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0%, #000 16%, #000 84%, transparent 100%);
+  background-color: var(--band);
+  background-image: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.05) 0 2px, transparent 2px 14px);
+  box-shadow:
+    inset 14px 0 18px rgba(0, 0, 0, 0.4),
+    inset -14px 0 18px rgba(0, 0, 0, 0.4),
+    0 40px 60px rgba(0, 0, 0, 0.6);
+  transition: background-color 0.6s var(--ease);
+}
+.case {
+  position: absolute;
+  left: 15%;
+  right: 15%;
+  top: 22%;
+  bottom: 22%;
+  border-radius: 28%;
+  background: linear-gradient(145deg, #eceef3 0%, #7d828c 32%, #2a2d34 68%, #a7acb5 100%);
+  box-shadow:
+    inset 0 2px 2px rgba(255, 255, 255, 0.55),
+    inset 0 -8px 14px rgba(0, 0, 0, 0.5),
+    0 24px 40px rgba(0, 0, 0, 0.55);
+}
+.crown {
+  position: absolute;
+  right: -5px;
+  top: 34%;
+  width: 7px;
+  height: 18%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #7a7f89, #eef0f4);
+}
+.screen {
+  position: absolute;
+  inset: 7%;
+  overflow: hidden;
+  border-radius: 22%;
+  background: radial-gradient(circle at 50% 30%, #1e2028, #030305 72%);
+  box-shadow: inset 0 0 0 2px #000, 0 0 30px rgba(255, 106, 43, 0.08);
+}
+.face {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.face-ring {
+  position: absolute;
+  width: 80%;
+  height: 80%;
+  transform: rotate(-90deg);
+}
+.track {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 9;
+}
+.arc {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 9;
+  stroke-linecap: round;
+  stroke-dasharray: 251.3;
+  stroke-dashoffset: 70;               /* ≈ 72% terisi */
+  filter: drop-shadow(0 0 6px rgba(255, 106, 43, 0.6));
+}
+.face-time {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(14px, 4.4vw, 26px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+.face-bpm {
+  position: relative;
+  z-index: 1;
+  font-size: clamp(9px, 2.4vw, 13px);
+  font-weight: 700;
+  color: #ff5577;
+}
+
+/* ---------- 7. Metrik / dashboard ---------- */
+.metrics {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 140px 7vw;
+}
+.section-head p:last-child {
+  color: var(--muted);
+  max-width: 52ch;
+  line-height: 1.6;
+}
+.section-head h2,
+.bands-copy h2,
+.specs h2,
+.order-card h2 {
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.02;
+  margin-bottom: 16px;
+}
+.dash {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-top: 48px;
+}
+.tile {
+  position: relative;
+  overflow: hidden;
+  min-height: 160px;
+  padding: 24px;
+  border-radius: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  background: linear-gradient(180deg, #14161d, #0b0c10);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 8px;
+}
+.tile strong {
+  font-size: clamp(28px, 3.2vw, 44px);
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
+.tile small {
+  color: var(--muted);
+  font-size: 14px;
+}
+.tile-ring { grid-column: span 2; }
+.tile-wide {
+  grid-column: span 4;
+  min-height: 200px;
+}
+.tile-ring {
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 20px;
+}
+.tile-ring strong { font-size: 34px; }
+.ring-svg {
+  width: 110px;
+  height: 110px;
+  flex-shrink: 0;
+  transform: rotate(-90deg);
+}
+.ring-bg {
+  fill: none;
+  stroke: rgba(255, 255, 255, 0.08);
+  stroke-width: 10;
+}
+.ring-fg {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 10;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.9s var(--ease);
+}
+.hr {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 64px;
+  filter: drop-shadow(0 0 6px rgba(255, 85, 119, 0.6));
+}
+.hr polyline {
+  fill: none;
+  stroke: #ff5577;
+  stroke-width: 2.5;
+  stroke-linejoin: round;
+  vector-effect: non-scaling-stroke;
+}
+
+/* ---------- 8. Pemilih tali ---------- */
+.bands {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 6vw;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 140px 7vw;
+}
+.bands-product {
+  width: min(100%, 380px);
+  justify-self: center;
+  animation: sway 9s ease-in-out infinite;
+}
+.swatches {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 36px;
+}
+.swatch {
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  background: #101218;
+  color: var(--fg);
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.3s var(--ease), border-color 0.3s;
+}
+.swatch:hover { transform: translateY(-3px); }
+.swatch.active { border-color: var(--c); }
+.sw-dot {
+  display: block;
+  height: 56px;
+  margin-bottom: 10px;
+  border-radius: 12px;
+  background: var(--c);
+  box-shadow: 0 12px 26px -12px var(--c);
+}
+.swatch b {
+  display: block;
+  font-size: 14px;
+}
+.swatch small {
+  display: block;
+  margin-top: 2px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+/* ---------- 9. Spesifikasi ---------- */
+.specs {
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 120px 7vw;
+}
+.spec-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 40px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.spec-grid > div {
+  padding: 30px 24px 30px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.spec-grid dt {
+  margin-bottom: 10px;
+  color: var(--muted);
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+}
+.spec-grid dd {
+  font-size: clamp(18px, 2vw, 24px);
+  font-weight: 600;
+}
+
+/* ---------- 10. Beli ---------- */
+.order {
+  position: relative;
+  isolation: isolate;
+  min-height: 80vh;
+  display: grid;
+  place-items: center;
+  padding: 120px 7vw;
+  text-align: center;
+}
+.order::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(40% 50% at 50% 50%, rgba(61, 123, 255, 0.18), transparent 70%);
+}
+.order-card { max-width: 560px; }
+.order-card p:not(.eyebrow) {
+  margin: 14px 0 30px;
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+.footer {
+  padding: 40px 7vw;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  color: var(--muted);
+  font-size: 14px;
+  text-align: center;
+}
+
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 28px;
+  z-index: 70;
+  transform: translate(-50%, 160%);
+  padding: 12px 22px;
+  border-radius: 999px;
+  background: #fff;
+  color: #000;
+  font-size: 14px;
+  font-weight: 600;
+  transition: transform 0.5s var(--ease);
+}
+.toast.show { transform: translate(-50%, 0); }
+
+/* ---------- 11. Keyframes ---------- */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-18px); }
+}
+@keyframes sway {
+  0%, 100% { transform: rotate(-4deg); }
+  50%      { transform: rotate(4deg); }
+}
+@keyframes pulse {
+  0%, 100% { opacity: 0.35; }
+  50%      { opacity: 1; }
+}
+@keyframes wordIn {
+  from { opacity: 0; transform: translate(-50%, -42%); }
+  to   { opacity: 1; transform: translate(-50%, -50%); }
+}
+
+/* ---------- 12. Responsif ---------- */
+@media (max-width: 1024px) {
+  .dash { grid-template-columns: repeat(2, 1fr); }
+  .tile-wide { grid-column: span 2; }
+}
+
+@media (max-width: 860px) {
+  .nav-links { display: none; }
+
+  .hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+    gap: 36px;
+    padding-top: 130px;
+    text-align: center;
+  }
+  .hero-copy { order: 2; }
+  .hero-product { order: 1; width: min(70vw, 340px); }
+  .sub { margin-left: auto; margin-right: auto; }
+  .cta-row { justify-content: center; }
+
+  .story-sticky {
+    grid-template-columns: 1fr;
+    align-content: center;
+    gap: 20px;
+    padding: 70px 7vw 60px;
+    text-align: center;
+  }
+  .story-copy { min-height: 300px; }
+  .scene p { margin: 0 auto; }
+  .story-product { width: min(55vw, 240px); }
+  .story-dots {
+    left: 50%;
+    bottom: 3vh;
+    transform: translateX(-50%);
+  }
+
+  .bands { grid-template-columns: 1fr; text-align: center; }
+  .spec-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 520px) {
+  .story-copy { min-height: 250px; }
+  .dash { grid-template-columns: 1fr; }
+  .tile-ring, .tile-wide { grid-column: auto; }
+  .swatches { grid-template-columns: 1fr; }
+  .spec-grid { grid-template-columns: 1fr; }
+  .story-product { width: min(50vw, 200px); }
+}
+
+/* ---------- 13. Hormati pengaturan "kurangi gerakan" ---------- */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .reveal-up { opacity: 1; transform: none; }
+  .story-product { transform: none; }
+}
