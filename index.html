@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Strata Ridge X — smartwatch untuk petualangan ekstrem." />
+  <title>Strata Ridge X</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+
+  <header class="nav" id="nav">
+    <a href="#top" class="logo">STRATA</a>
+    <nav class="nav-links">
+      <a href="#spesifikasi">Spesifikasi</a>
+      <a href="#layar">Layar</a>
+      <a href="#tali">Tali</a>
+      <a href="#beli">Beli</a>
+    </nav>
+    <a href="#beli" class="btn btn-sm">Pesan</a>
+  </header>
+
+  <main>
+    <!-- 1. HERO -->
+    <section class="hero" id="top">
+      <div class="hero-word" aria-hidden="true">RIDGE</div>
+
+      <div class="hero-copy">
+        <p class="eyebrow reveal-up">Seri Ridge · 2026</p>
+        <h1 class="headline reveal-up">Dibuat untuk tempat yang tak kenal ampun.</h1>
+        <p class="sub reveal-up">Bingkai titanium, kaca safir, dan tahan air hingga 100 meter. Siap diajak ke mana saja.</p>
+        <div class="cta-row reveal-up">
+          <a href="#beli" class="btn">Pesan sekarang</a>
+          <a href="#spesifikasi" class="link">Lihat spesifikasi →</a>
+        </div>
+      </div>
+
+      <div class="hero-product" id="heroProduct" data-watch></div>
+
+      <p class="scroll-hint">Scroll ↓</p>
+    </section>
+
+    <!-- 2. STORY: scroll-driven, produk ikut berputar -->
+    <section class="story" id="spesifikasi">
+      <div class="story-sticky">
+        <div class="story-copy">
+          <article class="scene active">
+            <div><span class="big" data-count="52">52</span><span class="unit">mm</span></div>
+            <h2>Titanium yang siap menghadapi benturan.</h2>
+            <p>Bingkai grade-5 dengan kaca safir yang tahan goresan harian.</p>
+          </article>
+          <article class="scene">
+            <div><span class="big" data-count="3200">3200</span><span class="unit">nits</span></div>
+            <h2>Terang saat siang, redup saat malam.</h2>
+            <p>Layar tetap jelas di bawah sinar matahari langsung dan otomatis meredup di ruang gelap.</p>
+          </article>
+          <article class="scene">
+            <div><span class="big" data-count="100">100</span><span class="unit">meter</span></div>
+            <h2>Aman dibawa menyelam sampai 100 meter.</h2>
+            <p>Tahan air untuk berenang, snorkeling, dan selam dangkal.</p>
+          </article>
+          <article class="scene">
+            <div><span class="big" data-count="36">36</span><span class="unit">jam</span></div>
+            <h2>Pakai sampai habis.</h2>
+            <p>Hingga 36 jam pemakaian normal, dan 72 jam dalam mode hemat daya.</p>
+          </article>
+        </div>
+
+        <div class="story-product" data-watch></div>
+
+        <div class="story-dots"><span class="active"></span><span></span><span></span><span></span></div>
+      </div>
+    </section>
+
+    <!-- 3. METRIK LIVE -->
+    <section class="metrics" id="layar">
+      <div class="section-head reveal-up">
+        <p class="eyebrow">Layar</p>
+        <h2>Semua angka, sekilas.</h2>
+        <p>Data latihan diperbarui langsung. Perhatikan detak jantung yang terus bergerak.</p>
+      </div>
+
+      <div class="dash reveal-up">
+        <div class="tile tile-ring">
+          <svg class="ring-svg" viewBox="0 0 120 120">
+            <circle class="ring-bg" cx="60" cy="60" r="50" />
+            <circle class="ring-fg" id="ringFg" cx="60" cy="60" r="50" />
+          </svg>
+          <div>
+            <strong id="ringPct">0%</strong>
+            <p class="label">Target 10 km</p>
+          </div>
+        </div>
+
+        <div class="tile">
+          <span class="label">Jarak</span>
+          <strong id="dist">0,00</strong>
+          <small>km</small>
+        </div>
+
+        <div class="tile">
+          <span class="label">Waktu</span>
+          <strong id="timer">00:00:00</strong>
+        </div>
+
+        <div class="tile tile-wide">
+          <span class="label">Detak jantung</span>
+          <strong><span id="bpm">--</span> <small>bpm</small></strong>
+          <svg class="hr" viewBox="0 0 300 80" preserveAspectRatio="none">
+            <polyline id="hrLine" points="" />
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. TALI: pilih warna -->
+    <section class="bands" id="tali">
+      <div class="bands-product" id="bandsProduct" data-watch></div>
+
+      <div class="bands-copy reveal-up">
+        <p class="eyebrow">Tali</p>
+        <h2>Satu tali. Tiga medan.</h2>
+        <p class="muted">Tali loop elastis yang tetap nyaman di kulit basah maupun kering.</p>
+
+        <div class="swatches" role="radiogroup" aria-label="Pilih warna tali">
+          <button class="swatch active" role="radio" aria-checked="true" data-color="#ff6a2b" style="--c:#ff6a2b">
+            <span class="sw-dot"></span>
+            <b>Ridge Oranye</b>
+            <small>Gunung &amp; pantai</small>
+          </button>
+          <button class="swatch" role="radio" aria-checked="false" data-color="#3d7bff" style="--c:#3d7bff">
+            <span class="sw-dot"></span>
+            <b>Tide Biru</b>
+            <small>Air &amp; laut</small>
+          </button>
+          <button class="swatch" role="radio" aria-checked="false" data-color="#4a4f5c" style="--c:#4a4f5c">
+            <span class="sw-dot"></span>
+            <b>Summit Abu</b>
+            <small>Harian &amp; kota</small>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. SPESIFIKASI -->
+    <section class="specs">
+      <h2 class="reveal-up">Spesifikasi</h2>
+      <dl class="spec-grid">
+        <div class="reveal-up"><dt>Bingkai</dt><dd>Titanium grade-5, 52 mm</dd></div>
+        <div class="reveal-up"><dt>Kaca</dt><dd>Safir, tahan goresan</dd></div>
+        <div class="reveal-up"><dt>Kecerahan</dt><dd>3.200 nits</dd></div>
+        <div class="reveal-up"><dt>Tahan air</dt><dd>Hingga 100 meter</dd></div>
+        <div class="reveal-up"><dt>Baterai</dt><dd>Hingga 36 jam</dd></div>
+        <div class="reveal-up"><dt>Konektivitas</dt><dd>GPS dwifrekuensi, Bluetooth 5.3</dd></div>
+      </dl>
+    </section>
+
+    <!-- 6. BELI -->
+    <section class="order" id="beli">
+      <div class="order-card reveal-up">
+        <p class="eyebrow">Strata Ridge X</p>
+        <h2>Mulai dari Rp 6.499.000</h2>
+        <p>Gratis ongkir seluruh Indonesia. Dikirim dalam 2–3 hari kerja.</p>
+        <button class="btn btn-lg" id="buyBtn">Tambahkan ke keranjang</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© 2026 Strata Ridge X · Proyek demo, bebas dimodifikasi.</p>
+  </footer>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- Template komponen jam tangan (di-clone otomatis oleh script.js) -->
+  <template id="watch-tpl">
+    <div class="watch">
+      <div class="band"></div>
+      <div class="case">
+        <div class="crown"></div>
+        <div class="screen">
+          <div class="face">
+            <svg class="face-ring" viewBox="0 0 100 100">
+              <circle class="track" cx="50" cy="50" r="40" />
+              <circle class="arc" cx="50" cy="50" r="40" />
+            </svg>
+            <span class="face-time" data-clock>00:00</span>
+            <span class="face-bpm">♥ 128</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </template>
+
+  <script src="script.js"></script>
+</body>
+</html>
